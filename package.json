@@ -11,7 +11,7 @@
     ],
     "main": "./out/extension.js",
     "activationEvents": [
-        "onView:tamilTerminalView"
+        "onStartupFinished"
     ],
     "contributes": {
         "viewsContainers": {

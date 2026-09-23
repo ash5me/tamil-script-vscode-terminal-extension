@@ -1,14 +1,23 @@
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
-    vscode.window.showInformationMessage('Tamil Terminal: activate() called');
+    try {
+        vscode.window.showInformationMessage('Tamil Terminal: activate() called');
 
-    const provider = new TamilTerminalViewProvider(context.extensionUri);
-    context.subscriptions.push(
-        vscode.window.registerWebviewViewProvider('tamilTerminalView', provider, {
-            webviewOptions: { retainContextWhenHidden: true }
-        })
-    );
+        const provider = new TamilTerminalViewProvider(context.extensionUri);
+
+        const registration = vscode.window.registerWebviewViewProvider(
+            'tamilTerminalView',
+            provider,
+            { webviewOptions: { retainContextWhenHidden: true } }
+        );
+
+        vscode.window.showInformationMessage('Tamil Terminal: provider registered successfully');
+
+        context.subscriptions.push(registration);
+    } catch (err) {
+        vscode.window.showErrorMessage('Tamil Terminal activate() error: ' + String(err));
+    }
 }
 
 class TamilTerminalViewProvider implements vscode.WebviewViewProvider {
@@ -28,7 +37,7 @@ class TamilTerminalViewProvider implements vscode.WebviewViewProvider {
             };
             webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
         } catch (err) {
-            vscode.window.showErrorMessage('Tamil Terminal error: ' + String(err));
+            vscode.window.showErrorMessage('Tamil Terminal resolveWebviewView() error: ' + String(err));
         }
     }
 
