@@ -1,0 +1,57 @@
+{
+    "name": "vscode-tamil-terminal-graphemes",
+    "displayName": "Tamil Unicode Terminal",
+    "description": "VS Code terminal view supporting UTF-8 grapheme clusters and Tamil text.",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.80.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "main": "./out/extension.js",
+    "activationEvents": [
+        "onView:tamilTerminalView"
+    ],
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "tamil-terminal-container",
+                    "title": "Tamil Terminal",
+                    "icon": "media/terminal.svg"
+                }
+            ]
+        },
+        "views": {
+            "tamil-terminal-container": [
+                {
+                    "id": "tamilTerminalView",
+                    "name": "Tamil Unicode Terminal",
+                    "icon": "media/terminal.svg"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "npm run compile",
+        "test": "node ./out/test/runTest.js"
+    },
+    "dependencies": {
+        "@xterm/addon-unicode-graphemes": "^0.4.0",
+        "@xterm/xterm": "^6.0.0"
+    },
+    "devDependencies": {
+        "@types/glob": "^9.0.0",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "^20.19.43",
+        "@types/vscode": "^1.90.0",
+        "@vscode/test-electron": "^3.1.0",
+        "glob": "^13.0.6",
+        "mocha": "^12.0.2",
+        "typescript": "^5.5.0"
+    }
+}

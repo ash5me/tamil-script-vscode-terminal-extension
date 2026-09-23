@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Build output
+out/
+dist/
+
+# Test artifacts
+.vscode-test/
+
+# VS Code extension package
+*.vsix
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Debug
+.debug
+
+# Optional: if using Yarn or PnP
+.yarn/
+.pnp.*

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 16 16"
+     fill="currentColor">
+
+  <!-- Tamil 'அ' -->
+  <text x="8.05"
+        y="10.6"
+        text-anchor="middle"
+        font-family="Noto Sans Tamil, Nirmala UI, sans-serif"
+        font-size="5.8"
+        font-weight="700">
+    அ
+  </text>
+
+</svg>
