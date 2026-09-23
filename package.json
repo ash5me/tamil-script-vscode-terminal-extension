@@ -35,8 +35,10 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "compile": "tsc -p ./",
+        "compile": "tsc -p ./ && npm run build:webview && npm run copy:assets",
         "watch": "tsc -watch -p ./",
+        "build:webview": "esbuild src/webview/main.ts --bundle --outfile=media/main.js --format=iife",
+        "copy:assets": "node ./scripts/copy-assets.js",
         "pretest": "npm run compile",
         "test": "node ./out/test/runTest.js"
     },
@@ -50,6 +52,7 @@
         "@types/node": "^20.19.43",
         "@types/vscode": "^1.90.0",
         "@vscode/test-electron": "^3.1.0",
+        "esbuild": "^0.24.0",
         "glob": "^13.0.6",
         "mocha": "^12.0.2",
         "typescript": "^5.5.0"

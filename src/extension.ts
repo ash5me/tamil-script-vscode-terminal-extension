@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 
 export function activate(context: vscode.ExtensionContext) {
+    vscode.window.showInformationMessage('Tamil Terminal: activate() called');
+
     const provider = new TamilTerminalViewProvider(context.extensionUri);
     context.subscriptions.push(
         vscode.window.registerWebviewViewProvider('tamilTerminalView', provider, {
@@ -17,16 +19,22 @@ class TamilTerminalViewProvider implements vscode.WebviewViewProvider {
         context: vscode.WebviewViewResolveContext,
         _token: vscode.CancellationToken,
     ) {
-        webviewView.webview.options = {
-            enableScripts: true,
-            localResourceRoots: [vscode.Uri.joinPath(this._extensionUri, 'media')]
-        };
-        webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
+        try {
+            vscode.window.showInformationMessage('Tamil Terminal: resolveWebviewView() called');
+
+            webviewView.webview.options = {
+                enableScripts: true,
+                localResourceRoots: [vscode.Uri.joinPath(this._extensionUri, 'media')]
+            };
+            webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
+        } catch (err) {
+            vscode.window.showErrorMessage('Tamil Terminal error: ' + String(err));
+        }
     }
 
     private _getHtmlForWebview(webview: vscode.Webview): string {
         const styleUri = webview.asWebviewUri(
-            vscode.Uri.joinPath(this._extensionUri, 'media', 'style.css')
+            vscode.Uri.joinPath(this._extensionUri, 'media', 'xterm.css')
         );
         const scriptUri = webview.asWebviewUri(
             vscode.Uri.joinPath(this._extensionUri, 'media', 'main.js')
@@ -46,6 +54,10 @@ class TamilTerminalViewProvider implements vscode.WebviewViewProvider {
                 ">
                 <title>Tamil Terminal</title>
                 <link rel="stylesheet" href="${styleUri}">
+                <style>
+                    html, body { height: 100%; margin: 0; padding: 0; }
+                    #terminal-container { height: 100%; padding: 4px; box-sizing: border-box; }
+                </style>
             </head>
             <body>
                 <div id="terminal-container"></div>
